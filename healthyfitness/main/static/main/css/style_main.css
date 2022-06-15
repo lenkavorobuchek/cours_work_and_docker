@@ -1,0 +1,177 @@
+@font-face {
+    font-family: "Raleway";
+    src: local('Raleway-Regular'), url("../fonts/Raleway-Regular.ttf") format('truetype');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    background-color: #FFFFFF;
+}
+
+header {
+    background-color: #CCE0FB;
+    width: 100%;
+    height: 60px;
+    left: -83px;
+}
+
+.head {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+#wrapper {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo{
+    margin-top: 5px;
+    width: 40px;
+    height: 50px;
+    float: left;
+}
+
+
+.navigation {
+    float: right;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu li a:hover {
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 20px;
+    float: left;
+    display: block;
+    margin-left: 60px;
+}
+
+.readNewArticles p{
+    font-size: 18px;
+    padding-top: 20px;
+}
+
+.containerOfArticles{
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.containerOfArticles li{
+    float: left;
+    width: 400px;
+}
+
+.containerOfArticles a{
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    color: black;
+    height: 70px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+
+
+.firstArticle{
+    box-shadow: 0px 0px 10px 1px #A09E9E;
+}
+
+
+.firstArticle:hover{
+    box-shadow: 0px 0px 25px 1px #80B9ED;
+}
+
+.mainPhrase p{
+    font-size: 60px;
+    padding-top: 50px;
+    display: block;
+}
+
+.mainImage{
+    float: right;
+    padding: 0;
+    margin-left: 500px;
+    height: 60vh;
+    width: auto;
+    position: fixed;
+    bottom: 0;
+}
+
+.buttonCalc{
+    margin-top: 15vh;
+}
+
+.buttonCalc a:hover{
+    box-shadow: 0px 0px 20px 4px #80B9ED;
+}
+
+.buttonCalc a{
+    text-decoration: none;
+    color: black;
+    background: #80B9ED;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 20px;
+    float: left;
+    font-size: 24px;
+    position: fixed;
+    bottom: 40vh;
+}
+
+.textAboutCalc p{
+    font-size: 24px;
+    position: fixed;
+    bottom: 50vh;
+}
+
+.textAboutReg p{
+    width: 420px;
+    height: 128px;
+    font-size: 24px;
+    margin: 0;
+    position: fixed;
+    bottom: 15vh;
+}
+
+
+.buttonReg{
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+    font-size: 24px;
+    background: #A8D2A0;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 5vh;
+    position: fixed;
+    bottom: 0;
+}
+
+.buttonReg:hover{
+    box-shadow: 0px 0px 20px 4px #A8D2A0;
+}

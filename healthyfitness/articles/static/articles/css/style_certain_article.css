@@ -1,0 +1,118 @@
+@font-face {
+    font-family: "Raleway";
+    src: local('Raleway-Regular'), url("../fonts/Raleway-Regular.ttf") format('truetype');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Raleway, sans-serif;
+    background-color: #F0F3F3;
+}
+
+header {
+    background-color: #CCE0FB;
+    width: 100%;
+    height: 60px;
+}
+
+.head{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+#wrapper {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo{
+    margin-top: 5px;
+    width: 40px;
+    height: 50px;
+    float: left;
+}
+
+
+.navigation {
+    float: right;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu li a:hover {
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 20px;
+    float: left;
+    display: block;
+    margin-right: 60px;
+}
+
+.iconLK {
+    float: left;
+    display: block;
+    margin-right: 60px;
+    margin-top: 10px;
+}
+
+.imgLK {
+    width: 35px;
+    height: 35px;
+}
+
+.titleOfArticle{
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 24px;
+}
+
+.contentOfArticle{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.photoOfArticle{
+    margin-left: 10%;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.2);
+}
+
+.timeOfArticle{
+    float:right;
+    margin-right: 10%;
+}
+
+.Category {
+    margin-left: 10%;
+    font-size: 18px;
+    padding: 10px;
+    background: #FFFFFF;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.rectangle{
+    background-color: #F0F3F3;
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

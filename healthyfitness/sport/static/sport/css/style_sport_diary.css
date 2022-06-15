@@ -1,0 +1,173 @@
+@font-face {
+    font-family: "Raleway";
+    src: local('Raleway-Regular'), url("../fonts/Raleway-Regular.ttf") format('truetype');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway";
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #CCE0FB;
+    width: 100%;
+    height: 60px;
+}
+
+.head {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.logo{
+    margin-top: 5px;
+    width: 40px;
+    height: 50px;
+    float: left;
+}
+
+
+.navigation {
+    float: right;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu li a:hover {
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 20px;
+    float: left;
+    display: block;
+    margin-left: 60px;
+}
+
+#wrapper {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.leftSide{
+    float: left;
+}
+
+.leftSide div{
+    list-style-type: none;
+    margin-bottom: 50px;
+    display: block;
+    width: 250px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.leftSide div a{
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    padding-right: 0;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.water{
+    background-color: #80B9ED;
+}
+
+.food{
+    background-color: #F3E38D;
+
+}
+
+.weightControl{
+    background-color: #98EB88;
+}
+
+.sport{
+    background-color: #EB7272;
+     font-weight: bold;
+}
+
+.water:hover{
+    box-shadow: 0px 0px 25px 3px #80B9ED;
+}
+
+.food:hover{
+    box-shadow: 0px 0px 25px 3px #F3E38D;
+}
+
+.weightControl:hover{
+    box-shadow: 0px 0px 25px 3px #98EB88;
+}
+
+.sport:hover{
+    box-shadow: 0px 0px 25px 3px #EB7272;
+}
+
+.rightSide{
+    float: right;
+    margin-top: 0;
+}
+
+.selectOption{
+    column-count: 2;
+    width: 670px;
+    column-width: 500px;
+    margin-bottom: 20px;
+}
+
+.selectOption ul{
+    padding: 0;
+    margin: 0;
+}
+
+.selectOption ul li{
+    list-style-type: none;
+}
+
+.selectOption ul li a{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+    padding: 10px 25px 10px 25px;
+    border: 3px solid #EB7272;
+    float: left;
+    text-align: center;
+}
+
+.selectOption ul li a:hover{
+    box-shadow: 0px 0px 4px 2px #EB7272;
+}
+
+.diary{
+    margin-left: 40px;
+}
+
+.rectangle{
+    width: 800px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-top: 50px;
+    border: 3px solid #EB7272;
+}

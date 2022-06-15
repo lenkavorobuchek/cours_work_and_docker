@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление воды</title>
+    <link href="{% static 'water_tracker/css/style_add_water.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'water_tracker/img/water_pattern.jpg' %}'); background-size: auto;">
+
+<header>
+        <div class = container>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'main/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}" style="font-weight: bold">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+</header>
+
+<div id="wrapper">
+
+    <div class="leftSide">
+            <div onclick="location.href='{% url 'add_water' %}'" class="water"><a href="{% url 'add_water' %}" class="water_but">Трекер воды</a></div>
+            <div onclick="location.href='{% url 'search' %}'" class="food"><a href="{% url 'search' %}" class="food_but">Дневник питания</a></div>
+            <div onclick="location.href='{% url 'add_weight' %}'" class="weightControl"><a href="{% url 'add_weight' %}" class="weight_but">Контроль веса</a></div>
+            <div onclick="location.href='{% url 'add_sport' %}'" class="sport"><a href="{% url 'add_sport' %}" class="sport_but">Дневник тренировок</a></div>
+    </div>
+
+    <div class="rightSide">
+        <div class="selectOption">
+                <ul>
+                    <li><a href="{% url 'add_water' %}" style="font-weight: bold">Добавление воды</a></li>
+                    <li><a href="{% url 'water_tracker' %}" class="tracker">Трекер воды</a></li>
+                </ul>
+            </div>
+        <div class="rectangle">
+            <div class="formImg">
+                <div class="leftInf">
+                    <p class="todayDrink">Сегодня выпито:</p>
+                    <p class="todayGlasses">{{ glasses }}</p>
+                    <p class="chooseGlasses">Укажите количество стаканов</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <button id="minus" style="float: left; margin-top: 38px; margin-left: 15px;"><img src="{% static 'water_tracker/img/minus.png' %}"></button>
+                        <input class="form-input" type="number" placeholder="Количество стаканов" name="add_water_inp" id="add_water_inp" value="{{ amount }}"
+                               style="text-align: end; font-size: 24px; margin-top: 55px; margin-left: 84px; background-color: #98EB88;" readonly>
+                        <button id="plus" style="float: right; margin-top: 38px; margin-left: 15px;"><img src="{% static 'water_tracker/img/plus.png' %}"></button>
+
+                    </form>
+                </div>
+
+            <img src="{% static 'water_tracker/img/glass.png' %}" class="imgGlass">
+            </div>
+            <p class="advice">Рекомендуемая норма потребления воды - 2 литра (8 стаканов) в сутки</p>
+        </div>
+        <script>
+          var inp = document.getElementById('add_water_inp'),
+          plus = document.getElementById("plus");
+          plus.addEventListener("click", function() {
+            if (inp.valueAsNumber < 15)
+            inp.valueAsNumber = inp.valueAsNumber + 1;
+          });
+          var minus = document.getElementById("minus");
+          minus.addEventListener("click", function() {
+            if (inp.valueAsNumber > 0)
+            inp.valueAsNumber = inp.valueAsNumber - 1;
+          });
+        </script>
+
+        <script>
+        function getdetails(clicked_object) {
+            if (document.getElementById("add_water_inp").value >= 0 && document.getElementById("add_water_inp").value <= 15)
+                alert("Результат успешно записан")
+            else
+                alert("Некорректно введено количество стаканов")
+        }
+        </script>
+        </div>
+</div>
+</body>
+</html>

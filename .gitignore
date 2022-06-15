@@ -1,0 +1,6 @@
+venv
+.idea
+healthyfitness/*/__pycache__/*
+healthyfitness/*/*/__pycache__/*
+healthyfitness/.idea/*
+healthyfitness/db.sqlite3

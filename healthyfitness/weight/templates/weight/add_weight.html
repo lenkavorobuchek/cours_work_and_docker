@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись веса</title>
+    <link href="{% static 'weight/css/style_add_weight.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'weight/img/weight_pattern.png' %}'); background-size: auto;">
+
+<header>
+    <div class="head">
+        <a href="{% url 'home' %}"><img src="{% static 'main/img/iconLogo.png' %}" alt="" class="logo"></a>
+        <nav class="navigation">
+            <ul class="menu">
+                <li class="text">
+                    <a href="{% url 'home' %}">Главная</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'articles' %}">Статьи</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'calculator' %}">Калькулятор</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'product_selection' %}">Еда</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="text">
+                        <a href="{% url 'personalArea' %}" style="font-weight: bold">{{ user.username }} | Личный кабинет</a>
+                    </li>
+                {% else %}
+                    <li class="text">
+                        <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<div id="wrapper">
+    <div class="leftSide">
+        <div onclick="location.href='{% url 'add_water' %}'" class="water"><a href="{% url 'add_water' %}" class="water_but">Трекер воды</a></div>
+            <div onclick="location.href='{% url 'search' %}'" class="food"><a href="{% url 'search' %}" class="food_but">Дневник питания</a></div>
+            <div onclick="location.href='{% url 'add_weight' %}'" class="weightControl"><a href="{% url 'add_weight' %}" class="weight_but">Контроль веса</a></div>
+            <div onclick="location.href='{% url 'add_sport' %}'" class="sport"><a href="{% url 'add_sport' %}" class="sport_but">Дневник тренировок</a></div>
+    </div>
+
+    <div class="rightSide">
+        <div class="selectOption">
+            <ul>
+                <li><a href="{% url 'add_weight' %}" style="font-weight: bold">Записать вес</a></li>
+                <li><a href="{% url 'weight_tracker' %}" class="tracker">Трекер веса</a></li>
+            </ul>
+        </div>
+
+        <div class="rectangle">
+            <p class="currentWeight">Текущий вес:</p>
+            {% if current_weight %}
+                <p class="userCurrentWeight">{{ current_weight }} кг</p>
+            {% else %}
+                <p class="userCurrentWeight">--- кг</p>
+            {% endif %}
+            <p class="updateWeight">Обновите данные о весе</p>
+            <form method="post">
+                {% csrf_token %}
+                <input name="weight_inp" id="weight_inp" type="number" min="25" max="210" value="{{ current_weight }}" step="0.1">
+                <button class="save_weight" type="submit" onclick="getdetails(this)">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <script>
+    function getdetails(clicked_object) {
+        if (document.getElementById("weight_inp").value >= 25 && document.getElementById("weight_inp").value <= 210)
+            alert("Ваш вес успешно записан")
+    }
+    </script>
+
+
+</div>
+
+</body>
+</html>

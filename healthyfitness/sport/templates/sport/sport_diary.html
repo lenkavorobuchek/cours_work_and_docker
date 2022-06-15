@@ -1,0 +1,131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Дневник тренировок</title>
+    <link href="{% static 'sport/css/style_sport_diary.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'sport/img/sport_pattern_red_people.jpg' %}'); background-size: auto;">
+
+<header>
+        <div class = container>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'registration/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}" style="font-weight: bold">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+</header>
+
+<div id="wrapper">
+
+    <div class="leftSide">
+            <div onclick="location.href='{% url 'add_water' %}'" class="water"><a href="{% url 'add_water' %}" class="water_but">Трекер воды</a></div>
+            <div onclick="location.href='{% url 'search' %}'" class="food"><a href="{% url 'search' %}" class="food_but">Дневник питания</a></div>
+            <div onclick="location.href='{% url 'add_weight' %}'" class="weightControl"><a href="{% url 'add_weight' %}" class="weight_but">Контроль веса</a></div>
+            <div onclick="location.href='{% url 'add_sport' %}'" class="sport"><a href="{% url 'add_sport' %}" class="sport_but">Дневник тренировок</a></div>
+    </div>
+
+
+    <div class="rightSide">
+        <div class="selectOption">
+            <ul>
+                <li><a href="{% url 'add_sport' %}" >Добавить тренировку</a></li>
+                <li><a href="{% url 'sport_diary' %}" class="diary" style="font-weight: bold">Дневник тренировок</a></li>
+            </ul>
+        </div>
+
+        <div class="rectangle">
+        <h3 style="text-align: center;">Выберите дату</h3>
+        <center>
+            <form action="{% url 'sport_diary' %}">
+                <input type="date" placeholder="Выберите дату" name="search" value="{{ value }}" id="date-search"
+                       style="border-radius: 5px; padding: 6px; border: 1px solid #EB7272; cursor: pointer;">
+                <button class="search_button" type="submit" onclick="getdetails(this)"
+                        style="background-color: #EB7272; border-radius: 5px; border: none; padding: 8px; cursor: pointer;">Искать</button>
+            </form>
+        </center>
+        <center>
+            {% if data %}
+            <table style="width: 700px; margin-top: 20px">
+            <thead>
+                <tr>
+                    <th style="display: none;">id</th>
+                    <th style="background-color: #EB7272; border: none; border-radius: 5px; padding: 10px">Упражнение</th>
+                    <th style="background-color: #EB7272; border: none; border-radius: 5px;">Время, мин</th>
+                    <th style="background-color: #EB7272; border: none; border-radius: 5px;">Ккал</th>
+                    <th style="background-color: #EB7272; border: none; border-radius: 5px;">Действие</th>
+                </tr>
+            </thead>
+            {% for i in data %}
+            <form id="form" method="post">
+                {% csrf_token %}
+                <tr>
+                    <td style="display: none;"><input name="id" value="{{ i.id }}"></td>
+                    <td align="center" style="border: 1px solid #EB7272; border-radius: 5px;">{{ i.id_training }}</td>
+                    <td align="center" style="border: 1px solid #EB7272; border-radius: 5px;">{{ i.duration_training_min }}</td>
+                    <td align="center" style="border: 1px solid #EB7272; border-radius: 5px;">{{ i.burned_kkal }}</td>
+                    <td class="product" style="border: none">
+                        <button style="cursor: pointer; margin-left: 50px; border: 1px solid #EB7272; border-radius: 5px"><img src="{% static 'food_diary/img/delete.png' %}" style="height: 10px;"></button>
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+            <tr>
+                <td style="background-color: #EB7272; border-radius: 5px; padding-left: 5px;">Всего</td>
+                <td align="center" style="background-color: #EB7272; border-radius: 5px; padding-left: 5px;">{{ total.training_time }}</td>
+                <td align="center" style="background-color: #EB7272; border-radius: 5px; padding-left: 5px;">{{ total.kkal }}</td>
+            </tr>
+            </table>
+        {% else %}
+            <h3>{{ error }}</h3>
+        {% endif %}
+        </center>
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <script>
+        if (document.getElementById("date-search").valueAsDate == null)
+            document.getElementById("date-search").valueAsDate = new Date();
+    </script>
+
+</div>
+
+</body>
+</html>

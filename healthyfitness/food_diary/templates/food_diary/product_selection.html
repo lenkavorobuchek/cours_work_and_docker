@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории продуктов</title>
+    <link href="{% static 'food_diary/css/style_product_selection.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'food_diary/img/food_pattern.jpg' %}'); background-size: contain;">
+<div class="mainInformation">
+<header>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'registration/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}" style="font-weight: bold">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+</header>
+
+<div id="wrapper">
+
+    <h1>Выберите категорию</h1>
+
+    <section class="typesProducts">
+        <div class="columnButtons">
+            <div class="leftButtons">
+                <ul>
+                    <li><a href="{% url 'meat' %}">Мясо</a></li>
+                    <li><a href="{% url 'seafood' %}">Морепродукты</a></li>
+                    <li><a href="{% url 'cereals' %}">Крупы</a></li>
+                    <li><a href="{% url 'bakery' %}">Мучные продукты</a></li>
+                    <li><a href="{% url 'drinks' %}">Напитки</a></li>
+                    <li><a href="{% url 'herbs_and_spices' %}">Травы и специи</a></li>
+                    <li><a href="{% url 'vegFruit' %}">Овощи и фрукты</a></li>
+                    <li><a href="{% url 'sweets' %}">Сладкое и снеки</a></li>
+                </ul>
+            </div>
+
+            <div class="rightButtons">
+                <ul>
+                    <li><a href="{% url 'milk' %}">Молочные продукты</a></li>
+                    <li><a href="{% url 'cookedMeals' %}">Готовые блюда</a></li>
+                    <li><a href="{% url 'nuts_and_oils' %}">Орехи и масла</a></li>
+                    <li><a href="{% url 'fast_food' %}">Фаст-фуд</a></li>
+                </ul>
+            </div>
+
+        </div>
+ </section>
+</div>
+
+</div>
+</body>
+</html>

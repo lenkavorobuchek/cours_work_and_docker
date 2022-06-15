@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="{% static 'main/css/style_main.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class = container>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'main/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}" style="font-weight: bold">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+<div id="wrapper">
+    <section>
+        <div class="readNewArticles">
+            <div class="container">
+                <p>Читайте новые статьи:</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="newArticles">
+            <div class = container>
+                <ul class="containerOfArticles">
+                    {% for a in titlesNewArticles %}
+                        <li><a href="{% url 'certainArticle' a.slag %}" class="firstArticle">{{a.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="mainPhrase">
+            <img src="{% static 'main/img/imgForMainPage.jpg' %}" alt="" class="mainImage">
+            <p>Ваше здоровье на нашем сайте</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="textAboutCalc">
+            <p>Узнайте Ваши суточные нормы</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="buttonCalc">
+            <a href="{% url 'calculator' %}">Рассчитать Ваши КБЖУ</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="textAboutReg">
+            <p>А чтобы отслеживать прогресс<br>и получить доступ личному кабинету<br>зарегистрируйтесь или войдите</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="buttonRegSec">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'personalArea' %}" class="buttonReg">Стать частью коммьюнити</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="buttonReg">Стать частью коммьюнити</a>
+            {% endif %}
+        </div>
+    </section>
+</div>
+</body>
+</html>

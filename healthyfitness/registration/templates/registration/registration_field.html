@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="{% static 'registration/css/style_registration.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'registration/img/patternSportPeople.jpg' %}'); background-size: cover;">
+
+<header>
+        <div class = container>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'registration/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+</header>
+
+<div id="wrapper">
+    <div class="reg_field">
+        <div class="rectangle">
+            <h4>Регистрация</h4>
+            <form method="post">
+                {% csrf_token %}
+                <h6 class="otherFields">Логин</h6>
+                {{ form.username }}
+                {{ form.username.errors }}
+                <h6 class="frstField">Email</h6>
+                {{ form.email }}
+                {{ form.email.errors }}
+                <h6 class="otherFields">Пароль</h6>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+                <h6 class="otherFields">Подтвердите пароль</h6>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+                 <button type="submit">Зарегистрироваться</button>
+            </form>
+            <a href="{% url 'login' %}" class="isAccount">Уже есть акаунт</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

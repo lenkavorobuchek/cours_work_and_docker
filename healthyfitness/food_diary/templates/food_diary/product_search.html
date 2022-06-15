@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск продуктов</title>
+    <link href="{% static 'food_diary/css/style_search_products.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'food_diary/img/food_pattern.jpg' %}'); background-size: auto;">
+
+<header>
+        <div class = container>
+            <div class="head">
+                <a href="{% url 'home' %}"><img src="{% static 'registration/img/iconLogo.png' %}" alt="" class="logo"></a>
+                <nav class="navigation">
+                    <ul class="menu">
+                        <li class="text">
+                            <a href="{% url 'home' %}">Главная</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'articles' %}">Статьи</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'calculator' %}">Калькулятор</a>
+                        </li>
+
+                        <li class="text">
+                            <a href="{% url 'product_selection' %}">Еда</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="text">
+                                <a href="{% url 'personalArea' %}" style="font-weight: bold">{{ user.username }} | Личный кабинет</a>
+                            </li>
+                        {% else %}
+                            <li class="text">
+                                <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+</header>
+
+<div id="wrapper">
+
+    <div class="leftSide">
+            <div onclick="location.href='{% url 'add_water' %}'" class="water"><a href="{% url 'add_water' %}" class="water_but">Трекер воды</a></div>
+            <div onclick="location.href='{% url 'search' %}'" class="food"><a href="{% url 'search' %}" class="food_but">Дневник питания</a></div>
+            <div onclick="location.href='{% url 'add_weight' %}'" class="weightControl"><a href="{% url 'add_weight' %}" class="weight_but">Контроль веса</a></div>
+            <div onclick="location.href='{% url 'add_sport' %}'" class="sport"><a href="{% url 'add_sport' %}" class="sport_but">Дневник тренировок</a></div>
+    </div>
+
+    <div class="rightSide">
+        <div class="selectOption">
+            <div class="selectButtons">
+                <ul>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'search' %}" style="font-weight: bold" class="select">Выбор продуктов</a></li>
+                    <li><a href="{% url 'food_diary' %}" class="foodDiary">Дневник питания</a></li>
+                    {% else %}
+                    <li><a href="{% url 'product_selection' %}">Категории продуктов</a></li>
+                    <li><a href="{% url 'search' %}" class="foodDiary" style="font-weight: bold">Поиск</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="rectangle">
+            <h3 align="center" class="typeOfProducts">Поиск продуктов</h3>
+            <form action="{% url 'search' %}">
+                <input class="searchProducts" minlength="2" placeholder="Введите название продукта" name="search" value="{{ value }}">
+                <button class="search_button" type="submit">
+                    <img src="{% static 'food_diary/img/lupa.png'%}" class="lupa">Искать
+                </button>
+            </form>
+
+            {% if data %}
+                <h3 style="float: right; margin-right: 30px;">Представлена калорийность продуктов и готовых блюд на 100 грамм</h3>
+                <table class="table_sort">
+                    <thead>
+                    <tr>
+                        <th class="product" style="background-color: #F3E38D; display: none;">id</th>
+                        <th class="product" style="background-color: #F3E38D; border: none;">Продукт</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Вес, г</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Ккал</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Белков, г</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Жиров, г</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Углеводов, г</th>
+                        <th class="product" style="background-color: #F3E38D;border: none;">Действие</th>
+                    </tr>
+                    </thead>
+                    {% for i in data %}
+                    <form id="form" method="post">
+                        {% csrf_token %}
+                        <tr>
+                            <td style="display: none;" class="product"><input name="id" value="{{ i.id }}"></td>
+                            <td class="product" style="border: 1px solid #F3E38D;">{{ i.name_of_product }}</td>
+                            <td class="product" style="border: 1px solid #F3E38D;"><input id="{{ i.id }}" type="number" value="100" name="product_weight"></td>
+                            <td class="product" align="center" style="border: 1px solid #F3E38D;">{{ i.kkal }}</td>
+                            <td class="product" align="center" style="border: 1px solid #F3E38D;">{{ i.proteins }}</td>
+                            <td class="product" align="center" style="border: 1px solid #F3E38D;">{{ i.fats }}</td>
+                            <td class="product" align="center" style="border: 1px solid #F3E38D;">{{ i.carbohydrates }}</td>
+                            <td class="product" align="center" style="border: none;">
+                                <button name="{{ i.id }}" class="add_button" onclick="getdetails(this)">Добавить</button></td>
+                        </tr>
+                    </form>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <h3 style="margin-left: 40px;">{{ error }}</h3>
+            {% endif %}
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                const getSort = ({ target }) => {
+                    const order = (target.dataset.order = -(target.dataset.order || -1));
+                    const index = [...target.parentNode.cells].indexOf(target);
+                    const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
+                    const comparator = (index, order) => (a, b) => order * collator.compare(
+                        a.children[index].innerHTML,
+                        b.children[index].innerHTML
+                    );
+                    for(const tBody of target.closest('table').tBodies)
+                        tBody.append(...[...tBody.rows].sort(comparator(index, order)));
+
+                    for(const cell of target.parentNode.cells)
+                        cell.classList.toggle('sorted', cell === target);
+                };
+                document.querySelectorAll('.table_sort thead').forEach(tableTH => tableTH.addEventListener('click', () => getSort(event)));
+                });
+            </script>
+
+            <script>
+            function getdetails(clicked_object) {
+                let a = clicked_object.getAttribute('name');
+                if (document.getElementById(a).value > 0 && document.getElementById(a).value < 3001)
+                    alert("Продукт успешно записан")
+                else
+                    alert("Некорректно введен вес продукта")
+            }
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

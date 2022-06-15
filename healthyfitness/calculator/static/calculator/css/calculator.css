@@ -1,0 +1,297 @@
+@font-face {
+    font-family: "Raleway";
+    src: local('Raleway-Regular'), url("../fonts/Raleway-Regular.ttf") format('truetype');
+}
+
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    background-color: #F0F3F3;
+}
+
+header {
+    background-color: #CCE0FB;
+    width: 100%;
+    height: 60px;
+}
+
+.head {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#wrapper {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.logo{
+    margin-top: 5px;
+    width: 40px;
+    height: 50px;
+    float: left;
+}
+
+
+.navigation {
+    float: right;
+}
+
+.menu {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu li a:hover {
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 20px;
+    float: left;
+    display: block;
+    margin-left: 60px;
+}
+
+
+
+.main_block{
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    width: 850px;
+    background: #fff;
+    padding-top: 8px;
+    border-radius: 25px;
+    margin: 30px auto;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+
+
+h2 {
+    margin: 0;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.gender {
+    margin-top: 60px;
+    margin-left: 98px;
+}
+
+
+.weight {
+    margin-top: -71px;
+    float: right;
+    margin-right: 89px;
+}
+
+.age {
+    margin-top: 49px;
+    margin-left: 98px;
+}
+
+.activity {
+    margin-top: -71px;
+    float: right;
+    margin-right: 89px;
+}
+
+.growth {
+    margin-top: 49px;
+    margin-left: 98px;
+}
+
+.aim {
+    margin-top: -71px;
+    float: right;
+    margin-right: 89px;
+
+}
+
+.clearfix:after {
+    content: '';
+    display: table;
+    width: 100%;
+    clear: both;
+
+}
+
+
+.buttonCalculate button{
+    text-decoration: none;
+    color: black;
+    background: #E3964D;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 250px;
+    border: 0;
+    padding: 14px;
+    font-size: 24px;
+    float: left;
+    text-align: center;
+    margin-top: 54px;
+    margin-left: 285px;
+    margin-bottom: 32px;
+    cursor: pointer;
+}
+
+
+
+input {
+    text-decoration: none;
+    border-width: 0;
+    width: 236px;
+    height: 40px;
+    background: #D6FAB9;
+    border-radius: 13px;
+    color: black;
+    font-size: 18px;
+    color: black;
+}
+
+input::placeholder {
+    color: grey;
+}
+
+select {
+    text-decoration: none;
+    border-width: 0;
+    width: 236px;
+    height: 40px;
+    background: #D6FAB9;
+    border-radius: 13px;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+option {
+    background: white;
+    font-size: 16px;
+}
+
+
+.error_block{
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    width: 825px;
+    background: #f95d51;
+    padding-top: 8px;
+    border-radius: 16px;
+    text-align: center;
+    padding: 13px;
+    margin: 23px auto;
+}
+
+.get_result {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
+    width: 850px;
+    background: #fff;
+    padding-top: 8px;
+    border-radius: 16px;
+    margin: 23px auto;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.calories {
+    margin-left: 60px;
+}
+
+.imt {
+    float: right;
+    margin-right: 15px;
+    margin-top: -125px;
+}
+
+.res {
+    font-weight: 700;
+}
+
+.description p {
+    margin-top: -10px;
+    font-size: 17px;
+}
+
+
+.proteins {
+    margin-left: 60px;
+}
+
+.fats {
+    margin-left: 60px;
+}
+
+.carbohydrates {
+    margin-left: 60px;
+}
+
+.imt_limits p{
+    font-size: 19px;
+    margin-top: -10px;
+}
+
+
+.save_data button{
+    float: right;
+    text-decoration: none;
+    color: black;
+    background: #D6FAB9;
+    border-radius: 20px;
+    width: 233px;
+    border: 0;
+    padding: 12px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: -15px;
+    margin-right: 215px;
+    cursor: pointer;
+}
+
+
+.info h3 {
+    font-size: 18px;
+    margin-top: 85px;
+    margin-left: 60px;
+}
+
+
+
+select > option:nth-child(1) {
+    display: none;
+}
+
+
+.inactive button{
+    cursor: default;
+    color: grey;
+}
+
+.save_info h3 {
+    font-size: 18px;
+    margin-left: 60px;
+    margin-top: -10px;
+}

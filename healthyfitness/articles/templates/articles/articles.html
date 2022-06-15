@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="{% static 'articles/css/style_articles.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image: url('{% static 'articles/img/pattern_article.jpg' %}'); background-size: auto;">
+
+        <header>
+                <div class = container>
+                    <div class="head">
+                        <a href="{% url 'home' %}"><img src="{% static 'registration/img/iconLogo.png' %}" alt="" class="logo"></a>
+                        <nav class="navigation">
+                            <ul class="menu">
+                                <li class="text">
+                                    <a href="{% url 'home' %}">Главная</a>
+                                </li>
+
+                                <li class="text">
+                                    <a href="{% url 'articles' %}" style="font-weight: bold">Статьи</a>
+
+                                </li>
+
+                                <li class="text">
+                                    <a href="{% url 'calculator' %}">Калькулятор</a>
+                                </li>
+
+                                <li class="text">
+                                    <a href="{% url 'product_selection' %}">Еда</a>
+                                </li>
+
+                                {% if request.user.is_authenticated %}
+                                    <li class="text">
+                                        <a href="{% url 'personalArea' %}">{{ user.username }} | Личный кабинет</a>
+                                    </li>
+                                {% else %}
+                                    <li class="text">
+                                        <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+        </header>
+<div id="wrapper">
+       <div class="choiceTopic">
+           <div class="all" onclick="location.href='{% url 'articles' %}';"><a href="{% url 'articles' %}">Все</a></div>
+           <div class="health" onclick="location.href='{% url 'articles_health' %}';"><a href="{% url 'articles_health' %}">Здоровье</a></div>
+           <div class="devices" onclick="location.href='{% url 'articles_devices' %}';"><a href="{% url 'articles_devices' %}">Девайсы</a></div>
+           <div class="food" onclick="location.href='{% url 'articles_food' %}';"><a href="{% url 'articles_food' %}">Питание</a></div>
+           <div class="sport" onclick="location.href='{% url 'articles_sport' %}';"><a href="{% url 'articles_sport' %}">Спорт</a></div>
+       </div>
+
+       <div class="listOfTitles">
+           {% for a in titlesOfArticles%}
+               <div class="Article" onclick="location.href='{% url 'certainArticle' a.slag %}';">
+               <a href="{% url 'certainArticle' a.slag %}">{{a.title}}</a>
+               <img class="photoOfArticle" src="{{ a.photo.url }}">
+               <div style="clear: both"></div>
+               </div>
+           {% endfor %}
+
+       </div>
+   </div>
+</body>
+</html>

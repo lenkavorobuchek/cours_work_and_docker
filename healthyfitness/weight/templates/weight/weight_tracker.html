@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Трекер веса</title>
+    <link href="{% static 'weight/css/style_weight_tracker.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-image:url('{% static 'weight/img/weight_pattern.png' %}'); background-size: auto;">
+
+<header>
+    <div class="head">
+        <a href="{% url 'home' %}"><img src="{% static 'main/img/iconLogo.png' %}" alt="" class="logo"></a>
+        <nav class="navigation">
+            <ul class="menu">
+                <li class="text">
+                    <a href="{% url 'home' %}">Главная</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'articles' %}">Статьи</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'calculator' %}">Калькулятор</a>
+                </li>
+                <li class="text">
+                    <a href="{% url 'product_selection' %}">Еда</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="text">
+                        <a href="{% url 'personalArea' %}" style="font-weight: bold">{{ user.username }} | Личный кабинет</a>
+                    </li>
+                {% else %}
+                    <li class="text">
+                        <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'registration_field' %}">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="wrapper">
+    <div class="leftSide">
+        <div onclick="location.href='{% url 'add_water' %}'" class="water"><a href="{% url 'add_water' %}" class="water_but">Трекер воды</a></div>
+            <div onclick="location.href='{% url 'search' %}'" class="food"><a href="{% url 'search' %}" class="food_but">Дневник питания</a></div>
+            <div onclick="location.href='{% url 'add_weight' %}'" class="weightControl"><a href="{% url 'add_weight' %}" class="weight_but">Контроль веса</a></div>
+            <div onclick="location.href='{% url 'add_sport' %}'" class="sport"><a href="{% url 'add_sport' %}" class="sport_but">Дневник тренировок</a></div>
+    </div>
+
+    <div class="rightSide">
+        <div class="selectOption">
+            <ul>
+                <li><a href="{% url 'add_weight' %}">Записать вес</a></li>
+                <li><a href="{% url 'weight_tracker' %}" class="tracker" style="font-weight: bold">Трекер веса</a></li>
+            </ul>
+        </div>
+
+        <div class="rectangle">
+        {% if values %}
+            {% load googlecharts %}
+            <h2 style="text-align: center;">Трекер веса</h2>
+            <div id="count_graph" style="margin-left: 35px;; margin-top: -30px;"></div>
+
+            {% googlecharts %}
+                {% data values "count" %}
+                    {% col "string" "current_date" %}"{{ val }}"{% endcol %}
+                    {% col "number" "Вес, кг" %}{{ val }}{% endcol %}
+                {% enddata %}
+
+                {% options %}
+                    kind: "LineChart",
+                    options: {
+                        backgroundColor: "transparent",
+                        width: 740,
+                        height: 300,
+                        'legend': { position: 'bottom', textStyle: {color: 'black', bold: 'True', fontSize : 16}},
+                        'bar' : { groupWidth: '80%'},
+                        chartArea:{backgroundColor: "white"},
+                        vAxis: { textStyle: {color: 'black', fontSize: 14}},
+                        hAxis: { textStyle: {color: 'black', bold: 'True', fontSize: 13}}
+                    }
+
+                {% endoptions %}
+                {% graph "count_graph" "count" %}
+            {% endgooglecharts %}
+        {% else %}
+            <h2 style="margin-left: 15px;">Для отображения трекера необходимо <a href="{% url 'add_weight' %}">указать свой текущий вес</a> или
+                внести данные, необходимые для <a href="{% url 'calculator' %}">расчета КБЖУ</a>.</h2>
+        {% endif %}
+
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
