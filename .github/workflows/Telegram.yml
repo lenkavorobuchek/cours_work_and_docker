@@ -1,0 +1,16 @@
+name: Telegram Massage
+on:
+  workflow_run:
+    workflows: [ "Publish Docker image" ]
+    types:
+      - completed
+jobs:
+  messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Telegram Massage
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: New version publish
